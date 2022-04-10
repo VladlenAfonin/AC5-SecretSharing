@@ -54,7 +54,7 @@ class Dealer(dealer.Dealer):
         return [self.g ** c % self.q for c in self.poly.coeffs]
 
 
-def Demo():
+def Demo(fail: bool=False):
     n: int = 5
     t: int = 3
 
@@ -69,6 +69,8 @@ def Demo():
 
     d.generate_players()
     print(f'Players: {[str(p) for p in d.players]}')
+
+    if fail: d.players[0].y = 1
 
     checks: list[bool] = [feldman_check(p, d.g, d.q, d.generate_feldman_params()) for p in d.players[:t]]
 

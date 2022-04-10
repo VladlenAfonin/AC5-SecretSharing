@@ -2,7 +2,7 @@ from Crypto.Util import number
 from shamir.dealer import Dealer
 
 
-def Demo() -> None:
+def Demo(fail: bool=False) -> None:
     p: int = number.getPrime(8)
     k: int = number.getRandomRange(0, p)
     n: int = 5
@@ -16,6 +16,8 @@ def Demo() -> None:
 
     d.generate_players()
     print(f'Players: {[str(p) for p in d.players]}')
+
+    if fail: d.players[0].y = 1
 
     k_restored_linear_equations: int = d.restore_secret_matrix(d.players[:d.t])
     print(f'Linear equations: {k_restored_linear_equations}')

@@ -2,7 +2,7 @@ from Crypto.Util import number
 from pedersen.dealer import Dealer
 
 
-def Demo() -> None:
+def Demo(fail: bool=False) -> None:
     qBits: int = 8
     pBits: int = 10
     n: int = 5
@@ -18,6 +18,8 @@ def Demo() -> None:
 
     d.generate_players()
     print(f'Players: {[str(p) for p in d.players]}')
+
+    if fail: d.players[0].w = 1
 
     results = d.check_pedersen(d.players[:t])
     print(f'Check results: {results}')
