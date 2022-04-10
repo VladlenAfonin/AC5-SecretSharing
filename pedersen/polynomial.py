@@ -35,6 +35,6 @@ class Polynomial:
 
         :returns: String representation of a polynomial.
         """
-
+        
         result = f'{self.coeffs[0]} + '
         return result + ' + '.join([f'{c}x^{i + 1}' for i, c in enumerate(self.coeffs[1:])])

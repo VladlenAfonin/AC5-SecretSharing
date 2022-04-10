@@ -65,14 +65,14 @@ def Demo():
     print(f'{d.p = }, {d.q = }, {d.k = }, {d.g = }')
 
     d.generate_polynomial()
-    print(d.poly)
+    print(f'a(x) = {d.poly}')
 
     d.generate_players()
-    print([str(p) for p in d.players])
+    print(f'Players: {[str(p) for p in d.players]}')
 
     checks: list[bool] = [feldman_check(p, d.g, d.q, d.generate_feldman_params()) for p in d.players[:t]]
 
-    print(checks)
+    print(f'Check results: {checks}')
 
     k_restored_linear_equations: int = d.restore_secret_matrix(d.players[:d.t])
     print(f'Linear equations: {k_restored_linear_equations}')

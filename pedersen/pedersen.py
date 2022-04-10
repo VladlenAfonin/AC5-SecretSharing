@@ -1,21 +1,26 @@
 from Crypto.Util import number
-from shamir.dealer import Dealer
+from pedersen.dealer import Dealer
 
 
 def Demo() -> None:
-    p: int = number.getPrime(8)
-    k: int = number.getRandomRange(0, p)
+    qBits: int = 8
+    pBits: int = 10
     n: int = 5
     t: int = 3
 
-    print(f'{p = }, {k = }')
-    d: Dealer = Dealer(p, k, n, t)
+    d: Dealer = Dealer(qBits, pBits, n, t)
+
+    print(f'{d.p = }, {d.q = }, {d.k = }, {d.g = }, {d.h = }')
 
     d.generate_polynomial()
-    print(f'a(x) = {d.poly}')
+    print(f'delta(x) = {d.delta}')
+    print(f'gamma(x) = {d.gamma}')
 
     d.generate_players()
     print(f'Players: {[str(p) for p in d.players]}')
+
+    results = d.check_pedersen(d.players[:t])
+    print(f'Check results: {results}')
 
     k_restored_linear_equations: int = d.restore_secret_matrix(d.players[:d.t])
     print(f'Linear equations: {k_restored_linear_equations}')
